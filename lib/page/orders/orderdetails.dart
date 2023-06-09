@@ -407,7 +407,7 @@ class _orderdetailsState extends State<orderdetails> {
                               },
                               child: Container(
                                   decoration: BoxDecoration(
-                                      color: color.black,
+                                      color: themenotifier.isDark ? color.primarycolor : color.black,
                                       borderRadius: BorderRadius.circular(7)),
                                   height: 3.8.h,
                                   width: 3.8.h,

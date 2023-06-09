@@ -62,7 +62,7 @@ class _ProfileState extends State<Profile> {
                     height: 21.h,margin: EdgeInsets.only(left: 1.w,right: 1.w,top: 1.h),
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        color: themenotifier.isDark ? Colors.white : color.primarycolor,
+                        color: themenotifier.isDark ?Colors.white : color.primarycolor,
                       borderRadius: BorderRadius.circular(5.w)
                     ),
 

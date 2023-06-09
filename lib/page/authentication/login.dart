@@ -9,6 +9,7 @@ import 'package:deliveryboy/Widget/showdialog.dart';
 import 'package:deliveryboy/global%20class/color.dart';
 import 'package:deliveryboy/global%20class/height.dart';
 import 'package:deliveryboy/global%20class/prefsname.dart';
+import 'package:deliveryboy/theme/Thememodel.dart';
 import 'package:deliveryboy/translations/locale_keys.g.dart';
 import 'package:deliveryboy/validator/validation.dart';
 import 'package:dio/dio.dart';
@@ -16,6 +17,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 // import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
@@ -102,128 +104,130 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: WillPopScope(
-        onWillPop: () async {
-          final value = await showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text(
-                  LocaleKeys.Grocery_Driver.tr(),
-                  style:
-                      TextStyle(fontSize: 18, fontFamily: "Poppins_semibold"),
-                ),
-                content: Text(
-                  LocaleKeys.Are_you_sure_to_exit_from_this_app.tr(),
-                  style: TextStyle(fontSize: 16, fontFamily: "Poppins"),
-                ),
-                actions: [
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: color.primarycolor,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop(false);
-                    },
-                    child: Text(
-                      LocaleKeys.No.tr(),
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: color.white,
-                          fontFamily: "Poppins"),
-                    ),
+    return Consumer(builder: (context, Thememodel thememodel, child) {
+      return SafeArea(
+        child: WillPopScope(
+          onWillPop: () async {
+            final value = await showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: Text(
+                    LocaleKeys.Grocery_Driver.tr(),
+                    style:
+                    TextStyle(fontSize: 18, fontFamily: "Poppins_semibold"),
                   ),
-                  TextButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: color.primarycolor,
-                    ),
-                    onPressed: () {
-                      Navigator.of(context).pop(true);
-                    },
-                    child: Text(
-                      LocaleKeys.Yes.tr(),
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: color.white,
-                          fontFamily: "Poppins"),
-                    ),
+                  content: Text(
+                    LocaleKeys.Are_you_sure_to_exit_from_this_app.tr(),
+                    style: TextStyle(fontSize: 16, fontFamily: "Poppins"),
                   ),
-                ],
-              );
-            },
-          );
-          if (value != null) {
-            return Future.value(value);
-          } else {
-            return Future.value(false);
-          }
-        },
-        child: Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: color.primarycolor,
-            child: SingleChildScrollView(
-              child: Form(
-                key: _formkey,
-                child: Column(
-                  children: [
-                    Container(
-                        alignment: Alignment.topRight,
-                        // decoration: BoxDecoration(color: color.primarycolor),
-                        height: 4.h,
-                        margin: EdgeInsets.all(5.w),
-                        width: MediaQuery.of(context).size.width,
-                        child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Homepage()),
-                            );
-                          },
-                          child: Text(
-                            LocaleKeys.Skip_continue.tr(),
-                            style: TextStyle(
-                                fontFamily: 'Poppins',
-                                color: color.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 13.sp),
-                          ),
-                        )),
-                    Image.asset("Assets/Icons/ic_logo.png",height: 20.h,width: 50.w,),
-                    Card(
-                      margin: EdgeInsets.all(5.w),
-                      color: color.white,
-                      elevation: 3,
-                      child: Column(
-                        children: [
-                          Container(
-                            alignment: Alignment.topLeft,
-                            margin:
-                            EdgeInsets.only(left: 4.5.w, top: 3.5.h, bottom: 1.h),
+                  actions: [
+                    ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: color.primarycolor,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop(false);
+                      },
+                      child: Text(
+                        LocaleKeys.No.tr(),
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: color.white,
+                            fontFamily: "Poppins"),
+                      ),
+                    ),
+                    TextButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: color.primarycolor,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop(true);
+                      },
+                      child: Text(
+                        LocaleKeys.Yes.tr(),
+                        style: TextStyle(
+                            fontSize: 16,
+                            color: color.white,
+                            fontFamily: "Poppins"),
+                      ),
+                    ),
+                  ],
+                );
+              },
+            );
+            if (value != null) {
+              return Future.value(value);
+            } else {
+              return Future.value(false);
+            }
+          },
+          child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: thememodel.isDark ? Colors.black : color.primarycolor,
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formkey,
+                  child: Column(
+                    children: [
+                      Container(
+                          alignment: Alignment.topRight,
+                          // decoration: BoxDecoration(color: color.primarycolor),
+                          height: 4.h,
+                          margin: EdgeInsets.all(5.w),
+                          width: MediaQuery.of(context).size.width,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => Homepage()),
+                              );
+                            },
                             child: Text(
-                              LocaleKeys.Login.tr(),
-                              overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
+                              LocaleKeys.Skip_continue.tr(),
                               style: TextStyle(
-                                  fontSize: 23.sp,
+                                  fontFamily: 'Poppins',
+                                  color: color.white,
                                   fontWeight: FontWeight.bold,
-                                  fontFamily: 'Poppins_Bold',color: color.primarycolor),
+                                  fontSize: 13.sp),
                             ),
-                          ),
-                          Container(
-                            alignment: Alignment.topLeft,
-                            margin: EdgeInsets.only(
-                              left: 4.5.w,
+                          )),
+                      Image.asset("Assets/Icons/ic_logo.png",height: 20.h,width: 50.w,),
+                      Card(
+                        margin: EdgeInsets.all(5.w),
+                        color: color.white,
+                        elevation: 3,
+                        child: Column(
+                          children: [
+                            Container(
+                              alignment: Alignment.topLeft,
+                              margin: EdgeInsets.only(left: 4.5.w, top: 3.5.h, bottom: 1.h),
+                              child: Text(
+                                LocaleKeys.Login.tr(),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                    fontSize: 23.sp,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Poppins_Bold',color: thememodel.isDark ? Colors.black : color.primarycolor),
+                              ),
                             ),
-                            child: Text(
-                              LocaleKeys.Loginst.tr(),
-                              // LocaleKeys.Signin_to_your_account,
-                              style: TextStyle(fontSize: 12.sp, fontFamily: 'Poppins'),
+                            Container(
+                              alignment: Alignment.topLeft,
+                              margin: EdgeInsets.only(
+                                left: 4.5.w,
+                              ),
+                              child: Text(
+                                LocaleKeys.Loginst.tr(),
+                                // LocaleKeys.Signin_to_your_account,
+                                style: TextStyle(fontSize: 12.sp, fontFamily: 'Poppins',
+                                  color: Colors.black
+                                ),
+                              ),
                             ),
-                          ),
 
                             Container(
                               margin: EdgeInsets.only(top: 2.5.h, left: 4.w, right: 4.w),
@@ -232,17 +236,18 @@ class _LoginState extends State<Login> {
                                   TextFormField(
                                     validator: (value) => Validators.validateEmail(value!),
                                     cursorColor: Colors.grey,
-                                    controller: Email,
+                                    controller: Email,style: TextStyle(color: Colors.black),
                                     decoration: InputDecoration(
                                         hintText: LocaleKeys.Email.tr(),
                                         border: OutlineInputBorder(),
+                                        hintStyle: TextStyle(color: Colors.grey ),
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(7),
-                                          borderSide:  BorderSide(color: color.primarycolor),
+                                          borderSide:  BorderSide(color:thememodel.isDark ? Colors.black : color.primarycolor),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(7),
-                                          borderSide: const BorderSide(color: Colors.grey),
+                                          borderSide: BorderSide(color: thememodel.isDark ? Colors.black : color.primarycolor),
                                         )),
                                   ),
                                   SizedBox(
@@ -251,7 +256,7 @@ class _LoginState extends State<Login> {
                                   TextFormField(
                                     validator: (value) => Validators.validatePassword(value!),
                                     cursorColor: Colors.grey,
-                                    controller: password,
+                                    controller: password,style: TextStyle(color:  Colors.black ),
                                     obscureText: _obscureText,
                                     decoration: InputDecoration(
                                         suffixIcon: IconButton(
@@ -267,14 +272,15 @@ class _LoginState extends State<Login> {
                                               color: Colors.grey,
                                             )),
                                         hintText: LocaleKeys.Password.tr(),
+                                        hintStyle: TextStyle(color: Colors.grey),
                                         border: OutlineInputBorder(),
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(7),
-                                          borderSide:  BorderSide(color: color.primarycolor),
+                                          borderSide:  BorderSide(color: thememodel.isDark ? Colors.black : color.primarycolor),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(7),
-                                          borderSide: const BorderSide(color: Colors.grey),
+                                          borderSide:  BorderSide(color:thememodel.isDark ? Colors.black : color.primarycolor),
                                         )),
                                   ),
                                   SizedBox(
@@ -298,45 +304,45 @@ class _LoginState extends State<Login> {
                                   LocaleKeys.Forgot_Password.tr(),
                                   style: TextStyle(
                                       fontFamily: 'Poppins_semiBold',
-                                      fontSize: 10.5.sp,color: color.primarycolor),
+                                      fontSize: 10.5.sp,color: thememodel.isDark ? Colors.black : color.primarycolor),
                                 ),
                               ),
                             ),
-                          GestureDetector(
-                            onTap: () {
-                              if (_formkey.currentState!.validate()) {
-                                _loginAPI();
-                              }
-                            },
-                            child: Container(
-                              margin: EdgeInsets.only(top: 2.5.h,bottom: 2.5.h, left: 4.w, right: 4.w),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(7),
-                                color: color.primarycolor,
-                              ),
-                              height: 6.h,
-                              width: double.infinity,
-                              child: Center(
-                                child: Text(
-                                  LocaleKeys.Login.tr(),
-                                  style: TextStyle(
-                                      fontFamily: 'Poppins_Bold',
-                                      color: Colors.white,
-                                      fontSize: fontsize.Buttonfontsize),
+                            GestureDetector(
+                              onTap: () {
+                                if (_formkey.currentState!.validate()) {
+                                  _loginAPI();
+                                }
+                              },
+                              child: Container(
+                                margin: EdgeInsets.only(top: 2.5.h,bottom: 2.5.h, left: 4.w, right: 4.w),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(7),
+                                  color: thememodel.isDark ? Colors.black : color.primarycolor,
+                                ),
+                                height: 6.h,
+                                width: double.infinity,
+                                child: Center(
+                                  child: Text(
+                                    LocaleKeys.Login.tr(),
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins_Bold',
+                                        color: Colors.white,
+                                        fontSize: fontsize.Buttonfontsize),
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
+                            )
 
-                        ],
-                      ),
-                    )
-                  ],
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),
-          ),
-          /*Form(
+            /*Form(
             key: _formkey,
             child: Container(
               margin: EdgeInsets.only(
@@ -470,8 +476,9 @@ class _LoginState extends State<Login> {
               ),
             ),
           )*/
+          ),
         ),
-      ),
-    );
+      );
+    },);
   }
 }
