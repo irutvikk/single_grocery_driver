@@ -59,9 +59,13 @@ class _ProfileState extends State<Profile> {
               child: Column(
                 children: [
                   Container(
-                    height: 21.h,
+                    height: 21.h,margin: EdgeInsets.only(left: 1.w,right: 1.w,top: 1.h),
                     width: double.infinity,
-                    color: themenotifier.isDark ? Colors.white : color.primarycolor,
+                    decoration: BoxDecoration(
+                        color: themenotifier.isDark ? Colors.white : color.primarycolor,
+                      borderRadius: BorderRadius.circular(5.w)
+                    ),
+
                     child: Column(
                       children: [
                         Row(

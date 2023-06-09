@@ -115,13 +115,14 @@ class _HomepageState extends State<Homepage> {
                               ongoingdata!.completedOrder.toString(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontFamily: 'Poppins_bold', fontSize: 13.sp,color: Colors.black),
+                                  fontFamily: 'Poppins_bold', fontSize: 13.sp,color: themenotifier.isDark ? Colors.white: Colors.black),
                             ),
                             Text(
                               LocaleKeys.Total_Orders.tr(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontFamily: 'Poppins', fontSize: 10.5.sp,color: Colors.black),
+                                  fontFamily: 'Poppins', fontSize: 10.5.sp,fontWeight: FontWeight.bold,
+                                  color: themenotifier.isDark ? Colors.white: Colors.black),
                             )
                           ],
                         ),
@@ -152,13 +153,14 @@ class _HomepageState extends State<Homepage> {
                               ongoingdata!.ongoingOrder.toString(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontFamily: 'Poppins_bold', fontSize: 13.sp,color: Colors.black),
+                                  fontFamily: 'Poppins_bold', fontSize: 13.sp,color: themenotifier.isDark ? Colors.white: Colors.black),
                             ),
                             Text(
                               LocaleKeys.Ongoing_Orders.tr(),
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  fontFamily: 'Poppins', fontSize: 10.5.sp,color: Colors.black),
+                                  fontFamily: 'Poppins', fontSize: 10.5.sp,fontWeight: FontWeight.bold,
+                                  color: themenotifier.isDark ? Colors.white: Colors.black),
                             )
                           ],
                         ),
