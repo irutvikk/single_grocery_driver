@@ -168,7 +168,7 @@ class _HomepageState extends State<Homepage> {
                     ],
                   ),
                   SizedBox(
-                    height: 1.h,
+                    height: 2.h,
                   ),
                   Container(
                     alignment: Alignment.topLeft,

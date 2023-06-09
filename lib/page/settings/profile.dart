@@ -263,9 +263,7 @@ class _ProfileState extends State<Profile> {
                                               margin: EdgeInsets.only(
                                                   top: 1.5.h, bottom: 1.5.h),
                                               child: Text(
-                                                  LocaleKeys
-                                                          .Select_Application_Layout
-                                                      .tr(),
+                                                  LocaleKeys.Select_Application_Layout.tr(),
                                                   style: TextStyle(
                                                       fontSize: 11.sp,
                                                       color: Colors.grey,
@@ -280,15 +278,14 @@ class _ProfileState extends State<Profile> {
                                             ),
                                             TextButton(
                                               onPressed: () async {
-                                                await context
-                                                    .setLocale(Locale('en'));
+                                                await context.setLocale(Locale('en'));
                                                 Navigator.of(context).pop();
                                                 Phoenix.rebirth(context);
                                               },
                                               child: Text(
                                                 LocaleKeys.LTR.tr(),
                                                 style: TextStyle(
-                                                    fontSize: 12.sp,
+                                                    fontSize: 12.sp,color: themenotifier.isDark ? Colors.white : color.primarycolor,
                                                     fontWeight: FontWeight.bold,
                                                     fontFamily: 'Poppins_Bold'),
                                               ),
@@ -308,7 +305,7 @@ class _ProfileState extends State<Profile> {
                                               child: Text(
                                                 LocaleKeys.RTL.tr(),
                                                 style: TextStyle(
-                                                    fontSize: 12.sp,
+                                                    fontSize: 12.sp,color: themenotifier.isDark ? Colors.white : color.primarycolor,
                                                     fontWeight: FontWeight.bold,
                                                     fontFamily: 'Poppins_Bold'),
                                               ),
@@ -325,7 +322,7 @@ class _ProfileState extends State<Profile> {
                                               child: Text(
                                                 LocaleKeys.Cancel.tr(),
                                                 style: TextStyle(
-                                                  fontSize: 16,
+                                                  fontSize: 16,color: themenotifier.isDark ? Colors.white : color.primarycolor,
                                                   fontFamily: 'Poppins_Bold',
                                                 ),
                                               ),

@@ -22,6 +22,11 @@ class loginModel {
     }
     return data;
   }
+
+  @override
+  String toString() {
+    return 'loginModel{status: $status, message: $message, data: $data}';
+  }
 }
 
 class Data {
@@ -74,5 +79,10 @@ class Data {
     data['referral_code'] = referralCode;
     data['profile_image'] = profileImage;
     return data;
+  }
+
+  @override
+  String toString() {
+    return 'Data{id: $id, name: $name, mobile: $mobile, email: $email, loginType: $loginType, wallet: $wallet, isNotification: $isNotification, isMail: $isMail, referralCode: $referralCode, profileImage: $profileImage}';
   }
 }

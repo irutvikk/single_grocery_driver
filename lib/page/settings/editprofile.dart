@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:deliveryboy/config/api/api.dart';
 import 'package:deliveryboy/model/loginmodel.dart';
+import 'package:deliveryboy/page/authentication/login.dart';
 import 'package:deliveryboy/page/settings/profile.dart';
 import 'package:deliveryboy/Widget/Loder.dart';
 import 'package:deliveryboy/Widget/showdialog.dart';
@@ -150,20 +151,26 @@ class _EditprofileState extends State<Editprofile> {
         "driver_id": userid,
         "name": Name.text.toString(),
         "image": imagepath.isNotEmpty
-            ? await MultipartFile.fromFile(imagepath,
-                filename: imagepath.split("/").last)
+            ? await MultipartFile.fromFile(imagepath, filename: imagepath.split("/").last)
             : userprofileURl,
       });
 
       loader.showLoading();
 
-      var response = await Dio()
-          .post(defaultapi.appurl + Postapi.drivereditprofile, data: formdata);
+      var response = await Dio().post(defaultapi.appurl + Postapi.drivereditprofile, data: formdata);
       var finallist = await response.data;
       editprofiledata = loginModel.fromJson(finallist);
+      print(editprofiledata);
       loader.hideLoading();
       if (editprofiledata!.status == 1) {
-        Navigator.of(context).pop();
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString(UD_user_name, Name.text.toString());
+        // prefs.setString(UD_user_profile,editprofiledata!.data!.profileImage.toString());
+        print("object :: $imagepath");
+        setState(() {});
+
+        // Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Profile(),));
       } else {
         showdialog.showErroDialog(description: editprofiledata!.message);
       }
@@ -300,9 +307,7 @@ class _EditprofileState extends State<Editprofile> {
       bottomSheet: GestureDetector(
         onTap: () {
           if (defaultapi.environment == "sendbox") {
-            showdialog.showErroDialog(
-                description: LocaleKeys
-                    .This_operation_was_not_performed_due_to_demo_mode.tr());
+            showdialog.showErroDialog(description: LocaleKeys.This_operation_was_not_performed_due_to_demo_mode.tr());
           } else {
             EditprofileAPI();
           }

@@ -76,7 +76,7 @@ class _orderdetailsState extends State<orderdetails> {
                 return Scaffold(
                   body: Center(
                     child: CircularProgressIndicator(
-                      color: color.primarycolor,
+                      color: themenotifier.isDark ? Colors.white :  color.primarycolor,
                     ),
                   ),
                 );
@@ -97,7 +97,7 @@ class _orderdetailsState extends State<orderdetails> {
                     LocaleKeys.Order_Details.tr(),
                     textAlign: TextAlign.center,
                     style:
-                    TextStyle(fontFamily: 'Poppins_semibold', fontSize: 15.sp,color: color.primarycolor),
+                    TextStyle(fontFamily: 'Poppins_semibold', fontSize: 15.sp,color: themenotifier.isDark ? Colors.white :  color.primarycolor,),
                   ),
                   centerTitle: true,
                   leadingWidth: 40,
@@ -112,7 +112,7 @@ class _orderdetailsState extends State<orderdetails> {
                             width: double.infinity,
                             height: 16.h,
                             decoration: BoxDecoration(
-                                border: Border.all(color: color.primarycolor),
+                                border: Border.all(color: themenotifier.isDark ? Colors.white :  color.primarycolor,),
                                 borderRadius: BorderRadius.circular(6)),
                             child: Column(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -129,7 +129,7 @@ class _orderdetailsState extends State<orderdetails> {
                                       if (orderdata!.summery!.status == "4") ...[
                                         Container(
                                           decoration: BoxDecoration(
-                                              color: color.primarycolor,
+                                              color: color.green,
                                               borderRadius:
                                               BorderRadius.circular(5)),
                                           padding: EdgeInsets.all(6),
@@ -201,7 +201,7 @@ class _orderdetailsState extends State<orderdetails> {
                                     margin:
                                     EdgeInsets.only(top: 0.8.h, bottom: 0.8.h),
                                     height: 0.5.sp,
-                                    color: color.primarycolor,
+                                    color: themenotifier.isDark ? Colors.white :  color.primarycolor,
                                   ),
                                   Row(
                                     children: [
@@ -301,7 +301,7 @@ class _orderdetailsState extends State<orderdetails> {
                               style: TextStyle(
                                   fontFamily: 'Poppins_semibold',
                                   fontSize: 12.5.sp,
-                                  color: color.primarycolor),
+                                  color: themenotifier.isDark ? Colors.white :  color.primarycolor,),
                             ),
                           ],
                         ),
@@ -345,14 +345,14 @@ class _orderdetailsState extends State<orderdetails> {
                               },
                               child: Container(
                                   decoration: BoxDecoration(
-                                      color: color.primarycolor,
+                                      color: themenotifier.isDark ? Colors.white :  color.primarycolor,
                                       borderRadius: BorderRadius.circular(7)),
                                   height: 3.8.h,
                                   width: 3.8.h,
                                   child: Center(
                                     child: Icon(
                                       Icons.phone_in_talk_outlined,
-                                      color: Colors.white,
+                                      color: themenotifier.isDark ? Colors.black :  color.white,
                                       size: 13.sp,
                                     ),
                                   )),
@@ -370,7 +370,7 @@ class _orderdetailsState extends State<orderdetails> {
                               style: TextStyle(
                                   fontFamily: 'Poppins_semibold',
                                   fontSize: 12.5.sp,
-                                  color: color.primarycolor),
+                                  color: themenotifier.isDark ? Colors.white :  color.primarycolor,),
                             ),
                           ],
                         ),
@@ -407,7 +407,7 @@ class _orderdetailsState extends State<orderdetails> {
                               },
                               child: Container(
                                   decoration: BoxDecoration(
-                                      color: themenotifier.isDark ? color.primarycolor : color.black,
+                                      color: themenotifier.isDark ? color.white : color.black,
                                       borderRadius: BorderRadius.circular(7)),
                                   height: 3.8.h,
                                   width: 3.8.h,
@@ -416,7 +416,7 @@ class _orderdetailsState extends State<orderdetails> {
                                         image: AssetImage(
                                           'Assets/Icons/address.png',
                                         ),
-                                        color: Colors.white,
+                                        color: themenotifier.isDark ? Colors.black :  color.white,
                                         height: 1.9.h),
                                   )),
                             )
@@ -437,7 +437,7 @@ class _orderdetailsState extends State<orderdetails> {
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(7),
                                       border: Border.all(
-                                        color: color.primarycolor,
+                                        color: themenotifier.isDark ? Colors.white :  color.primarycolor,
                                         width: 0.8.sp,
                                       )),
                                   child: Row(children: [
@@ -616,7 +616,7 @@ class _orderdetailsState extends State<orderdetails> {
                               Text(
                                 LocaleKeys.Bill_Details.tr(),
                                 style: TextStyle(
-                                    fontFamily: 'Poppins_Bold', fontSize: 12.sp,color: color.primarycolor),
+                                    fontFamily: 'Poppins_Bold', fontSize: 12.sp,color: themenotifier.isDark ? Colors.white :  color.primarycolor,),
                               ),
                               SizedBox(
                                 height: 0.8.h,
@@ -733,10 +733,8 @@ class _orderdetailsState extends State<orderdetails> {
                                   ),
                                 ],
                               ),
-                              SizedBox(height: 1.h),
-                              SizedBox(
-                                height: 1.h,
-                              )
+                              orderdata!.summery!.status == "4" ? SizedBox(height: 10.h,) : SizedBox(height: 2.h),
+
                             ],
                           ),
                         ),
@@ -746,9 +744,9 @@ class _orderdetailsState extends State<orderdetails> {
                 ),
                 bottomSheet: orderdata!.summery!.status == "4"
                     ? Container(
-                  margin: EdgeInsets.only(top: 2.h, left: 3.w, right: 3.w),
+                  margin: EdgeInsets.only(top: 2.h, left: 3.w, right: 3.w,bottom: 1.h),
                   decoration: BoxDecoration(
-                      color: color.primarycolor,
+                      color:themenotifier.isDark ? Colors.white :  color.primarycolor,
                       borderRadius: BorderRadius.circular(6.5)),
                   height: 6.h,
                   width: double.infinity,
@@ -757,7 +755,7 @@ class _orderdetailsState extends State<orderdetails> {
                       LocaleKeys.Delivered.tr(),
                       style: TextStyle(
                           fontFamily: 'Poppins_Bold',
-                          color: Colors.white,
+                          color: themenotifier.isDark ? Colors.black :  color.white,
                           fontSize: fontsize.Buttonfontsize),
                     ),
                     onPressed: () {
