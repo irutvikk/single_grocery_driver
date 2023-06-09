@@ -252,7 +252,7 @@ class _EditprofileState extends State<Editprofile> {
                         hintText: LocaleKeys.Name.tr(),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(6.5),
-                          borderSide:  BorderSide(color: color.grey),
+                          borderSide:  BorderSide(color: color.primarycolor),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(6.5),
@@ -269,7 +269,7 @@ class _EditprofileState extends State<Editprofile> {
                         hintText: LocaleKeys.Email.tr(),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(6.5),
-                          borderSide: const BorderSide(color: Colors.grey),
+                          borderSide:  BorderSide(color: color.primarycolor),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(6.5),
@@ -286,7 +286,7 @@ class _EditprofileState extends State<Editprofile> {
                         hintText: LocaleKeys.Phoneno.tr(),
                         enabledBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(6.5),
-                          borderSide: const BorderSide(color: Colors.grey),
+                          borderSide:  BorderSide(color: color.primarycolor),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(6.5),

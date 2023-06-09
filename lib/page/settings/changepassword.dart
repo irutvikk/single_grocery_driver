@@ -226,7 +226,7 @@ class _ChangepasswordState extends State<Changepassword> {
           ),
           height: 6.h,
           decoration: BoxDecoration(
-              color: color.black, borderRadius: BorderRadius.circular(7)),
+              color: color.primarycolor, borderRadius: BorderRadius.circular(7)),
           child: Center(
             child: Text(
               LocaleKeys.reset.tr(),
