@@ -104,7 +104,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, Thememodel thememodel, child) {
+    return Consumer(builder: (context, Thememodel themenotifier, child) {
       return SafeArea(
         child: WillPopScope(
           onWillPop: () async {
@@ -124,7 +124,7 @@ class _LoginState extends State<Login> {
                   actions: [
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: color.primarycolor,
+                        backgroundColor: themenotifier.isDark ?Colors.white : color.primarycolor,
                       ),
                       onPressed: () {
                         Navigator.of(context).pop(false);
@@ -133,13 +133,13 @@ class _LoginState extends State<Login> {
                         LocaleKeys.No.tr(),
                         style: TextStyle(
                             fontSize: 16,
-                            color: color.white,
+                            color: themenotifier.isDark ?Colors.black : color.white,
                             fontFamily: "Poppins"),
                       ),
                     ),
                     TextButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: color.primarycolor,
+                        backgroundColor: themenotifier.isDark ?Colors.white : color.primarycolor,
                       ),
                       onPressed: () {
                         Navigator.of(context).pop(true);
@@ -148,7 +148,7 @@ class _LoginState extends State<Login> {
                         LocaleKeys.Yes.tr(),
                         style: TextStyle(
                             fontSize: 16,
-                            color: color.white,
+                            color: themenotifier.isDark ?Colors.black : color.white,
                             fontFamily: "Poppins"),
                       ),
                     ),
@@ -167,7 +167,7 @@ class _LoginState extends State<Login> {
             body: Container(
               width: double.infinity,
               height: double.infinity,
-              color: thememodel.isDark ? Colors.black : color.primarycolor,
+              color: themenotifier.isDark ? Colors.black : color.primarycolor,
               child: SingleChildScrollView(
                 child: Form(
                   key: _formkey,
@@ -181,19 +181,19 @@ class _LoginState extends State<Login> {
                           width: MediaQuery.of(context).size.width,
                           child: InkWell(
                             onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => Homepage()),
-                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(builder: (context) => Homepage()),
+                              // );
                             },
-                            child: Text(
-                              LocaleKeys.Skip_continue.tr(),
-                              style: TextStyle(
-                                  fontFamily: 'Poppins',
-                                  color: color.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13.sp),
-                            ),
+                            // child: Text(
+                            //   LocaleKeys.Skip_continue.tr(),
+                            //   style: TextStyle(
+                            //       fontFamily: 'Poppins',
+                            //       color: color.white,
+                            //       fontWeight: FontWeight.bold,
+                            //       fontSize: 13.sp),
+                            // ),
                           )),
                       Image.asset("Assets/Icons/ic_logo.png",height: 20.h,width: 50.w,),
                       Card(
@@ -212,7 +212,7 @@ class _LoginState extends State<Login> {
                                 style: TextStyle(
                                     fontSize: 23.sp,
                                     fontWeight: FontWeight.bold,
-                                    fontFamily: 'Poppins_Bold',color: thememodel.isDark ? Colors.black : color.primarycolor),
+                                    fontFamily: 'Poppins_Bold',color: themenotifier.isDark ? Colors.black : color.primarycolor),
                               ),
                             ),
                             Container(
@@ -243,11 +243,11 @@ class _LoginState extends State<Login> {
                                         hintStyle: TextStyle(color: Colors.grey ),
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(7),
-                                          borderSide:  BorderSide(color:thememodel.isDark ? Colors.black : color.primarycolor),
+                                          borderSide:  BorderSide(color:themenotifier.isDark ? Colors.black : color.primarycolor),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(7),
-                                          borderSide: BorderSide(color: thememodel.isDark ? Colors.black : color.primarycolor),
+                                          borderSide: BorderSide(color: themenotifier.isDark ? Colors.black : color.primarycolor),
                                         )),
                                   ),
                                   SizedBox(
@@ -276,11 +276,11 @@ class _LoginState extends State<Login> {
                                         border: OutlineInputBorder(),
                                         enabledBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(7),
-                                          borderSide:  BorderSide(color: thememodel.isDark ? Colors.black : color.primarycolor),
+                                          borderSide:  BorderSide(color: themenotifier.isDark ? Colors.black : color.primarycolor),
                                         ),
                                         focusedBorder: OutlineInputBorder(
                                           borderRadius: BorderRadius.circular(7),
-                                          borderSide:  BorderSide(color:thememodel.isDark ? Colors.black : color.primarycolor),
+                                          borderSide:  BorderSide(color:themenotifier.isDark ? Colors.black : color.primarycolor),
                                         )),
                                   ),
                                   SizedBox(
@@ -294,17 +294,17 @@ class _LoginState extends State<Login> {
                               margin: EdgeInsets.only(right: 4.w, top: 1.5.h),
                               child: InkWell(
                                 onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //       builder: (context) => const Forgotpass()),
-                                  // );
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => const Forgotpassword()),
+                                  );
                                 },
                                 child: Text(
                                   LocaleKeys.Forgot_Password.tr(),
                                   style: TextStyle(
                                       fontFamily: 'Poppins_semiBold',
-                                      fontSize: 10.5.sp,color: thememodel.isDark ? Colors.black : color.primarycolor),
+                                      fontSize: 10.5.sp,color: themenotifier.isDark ? Colors.black : color.primarycolor),
                                 ),
                               ),
                             ),
@@ -318,7 +318,7 @@ class _LoginState extends State<Login> {
                                 margin: EdgeInsets.only(top: 2.5.h,bottom: 2.5.h, left: 4.w, right: 4.w),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(7),
-                                  color: thememodel.isDark ? Colors.black : color.primarycolor,
+                                  color: themenotifier.isDark ? Colors.black : color.primarycolor,
                                 ),
                                 height: 6.h,
                                 width: double.infinity,

@@ -23,6 +23,7 @@ class aboutus extends StatefulWidget {
 class _aboutusState extends State<aboutus> {
   late WebViewController _controller;
   String aboutus = "";
+
   getdata() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {

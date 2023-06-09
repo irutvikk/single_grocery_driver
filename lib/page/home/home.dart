@@ -132,7 +132,7 @@ class _HomeState extends State<Home> {
                 actions: [
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: color.primarycolor,
+                      backgroundColor: themenotifier.isDark ?Colors.white : color.primarycolor,
                     ),
                     onPressed: () {
                       Navigator.of(context).pop(false);
@@ -142,12 +142,12 @@ class _HomeState extends State<Home> {
                       style: TextStyle(
                           fontSize: 14,
                           fontFamily: "Poppins",
-                          color: color.white),
+                          color: themenotifier.isDark ?Colors.black : color.white),
                     ),
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: color.primarycolor,
+                      backgroundColor: themenotifier.isDark ?Colors.white : color.primarycolor,
                     ),
                     onPressed: () {
                       Navigator.of(context).pop(true);
@@ -156,7 +156,7 @@ class _HomeState extends State<Home> {
                       LocaleKeys.Yes.tr(),
                       style: TextStyle(
                         fontSize: 14,
-                        color: color.white,
+                        color: themenotifier.isDark ?Colors.black : color.white,
                         fontFamily: "Poppins",
                       ),
                     ),
