@@ -10,12 +10,14 @@ import 'package:deliveryboy/Widget/showdialog.dart';
 import 'package:deliveryboy/global%20class/color.dart';
 import 'package:deliveryboy/global%20class/height.dart';
 import 'package:deliveryboy/global%20class/prefsname.dart';
+import 'package:deliveryboy/theme/Thememodel.dart';
 import 'package:deliveryboy/translations/locale_keys.g.dart';
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sizer/sizer.dart';
 
@@ -162,6 +164,7 @@ class _EditprofileState extends State<Editprofile> {
       var finallist = await response.data;
       editprofiledata = loginModel.fromJson(finallist);
       loader.hideLoading();
+
       if (editprofiledata!.status == 1) {
         Navigator.of(context).pop();
       } else {
@@ -180,156 +183,158 @@ class _EditprofileState extends State<Editprofile> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(
-              Icons.arrow_back_ios_outlined,
-              size: 20,
-            )),
-        title: Text(
-          LocaleKeys.Editprofile.tr(),
-          textAlign: TextAlign.center,
-          style: TextStyle(fontFamily: 'Poppins_semibold', fontSize: 12.sp,color: color.primarycolor),
-        ),
-        centerTitle: true,
-        leadingWidth: 40,
-      ),
-      body: Column(
-        children: [
-          Padding(padding: EdgeInsets.only(top: 2.h)),
-          Stack(children: [
-            InkWell(
-                onTap: () {},
-                child: SizedBox(
-                  height: 15.h,
-                  width: 15.h,
-                  child: ClipOval(
-                    child: imagepath.isNotEmpty
-                        ? Image.file(
-                            File(imagepath),
-                            fit: BoxFit.fill,
-                          )
-                        : Image(
-                            image: NetworkImage(userprofileURl.toString()),
-                            fit: BoxFit.fill,
-                          ),
-                  ),
-                )),
-            Positioned(
-                right: 0,
-                bottom: 0,
-                child: Container(
-                    height: 6.h,
-                    width: 11.w,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: IconButton(
-                      splashColor: Colors.transparent,
-                      icon: Icon(Icons.photo_camera),
-                      onPressed: () {
-                        imagePickerOption();
-                      },
-                    ))),
-          ]),
-          SizedBox(height: 4.h),
-          Container(
-              margin: EdgeInsets.only(top: 1.3.h, left: 4.w, right: 4.w),
-              child: Column(
-                children: [
-                  TextField(
-                    cursorColor: Colors.grey,
-                    controller: Name,
-                    decoration: InputDecoration(
-                        hintText: LocaleKeys.Name.tr(),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.5),
-                          borderSide:  BorderSide(color: color.primarycolor),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.5),
-                          borderSide:  BorderSide(color:color.primarycolor),
-                        )),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 40,
-                  ),
-                  TextField(
-                    readOnly: true,
-                    controller: Email,
-                    decoration: InputDecoration(
-                        hintText: LocaleKeys.Email.tr(),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.5),
-                          borderSide:  BorderSide(color: color.primarycolor),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.5),
-                          borderSide:  BorderSide(color:color.primarycolor),
-                        )),
-                  ),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height / 40,
-                  ),
-                  TextField(
-                    readOnly: true,
-                    controller: Phoneno,
-                    decoration: InputDecoration(
-                        hintText: LocaleKeys.Phoneno.tr(),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.5),
-                          borderSide:  BorderSide(color: color.primarycolor),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6.5),
-                          borderSide:  BorderSide(color: color.primarycolor),
-                        )),
-                  ),
-                ],
+    return Consumer(builder: (context, Thememodel themenotifier, child) {
+      return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(
+                Icons.arrow_back_ios_outlined,
+                size: 20,
               )),
-        ],
-      ),
-      bottomSheet: GestureDetector(
-        onTap: () {
-          if (defaultapi.environment == "sendbox") {
-            showdialog.showErroDialog(
-                description: LocaleKeys
-                    .This_operation_was_not_performed_due_to_demo_mode.tr());
-          } else {
-            EditprofileAPI();
-          }
-        },
-        child: Container(
-          margin: EdgeInsets.only(
-            left: 4.w,
-            top: 1.h,
-            right: 4.w,
-            bottom: 1.h,
+          title: Text(
+            LocaleKeys.Editprofile.tr(),
+            textAlign: TextAlign.center,
+            style: TextStyle(fontFamily: 'Poppins_semibold', fontSize: 12.sp,color: color.primarycolor),
           ),
-          height: 6.h,
-          decoration: BoxDecoration(
-            color: color.primarycolor,
-            borderRadius: BorderRadius.circular(7),
-          ),
-          child: Center(
-            child: Text(
-              LocaleKeys.reset.tr(),
-              style: TextStyle(
-                  fontFamily: 'Poppins_semiBold',
-                  color: Colors.white,
-                  fontSize: fontsize.Buttonfontsize),
+          centerTitle: true,
+          leadingWidth: 40,
+        ),
+        body: Column(
+          children: [
+            Padding(padding: EdgeInsets.only(top: 2.h)),
+            Stack(children: [
+              InkWell(
+                  onTap: () {},
+                  child: SizedBox(
+                    height: 15.h,
+                    width: 15.h,
+                    child: ClipOval(
+                      child: imagepath.isNotEmpty
+                          ? Image.file(
+                        File(imagepath),
+                        fit: BoxFit.fill,
+                      )
+                          : Image(
+                        image: NetworkImage(userprofileURl.toString()),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  )),
+              Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Container(
+                      height: 6.h,
+                      width: 11.w,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: themenotifier.isDark ? Colors.black : color.white,
+                      ),
+                      child: IconButton(
+                        splashColor: Colors.transparent,
+                        icon: Icon(Icons.photo_camera),
+                        onPressed: () {
+                          imagePickerOption();
+                        },
+                      ))),
+            ]),
+            SizedBox(height: 4.h),
+            Container(
+                margin: EdgeInsets.only(top: 1.3.h, left: 4.w, right: 4.w),
+                child: Column(
+                  children: [
+                    TextField(
+                      cursorColor: Colors.grey,
+                      controller: Name,
+                      decoration: InputDecoration(
+                          hintText: LocaleKeys.Name.tr(),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.5),
+                            borderSide:  BorderSide(color: color.primarycolor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.5),
+                            borderSide:  BorderSide(color:color.primarycolor),
+                          )),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 40,
+                    ),
+                    TextField(
+                      readOnly: true,
+                      controller: Email,
+                      decoration: InputDecoration(
+                          hintText: LocaleKeys.Email.tr(),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.5),
+                            borderSide:  BorderSide(color: color.primarycolor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.5),
+                            borderSide:  BorderSide(color:color.primarycolor),
+                          )),
+                    ),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height / 40,
+                    ),
+                    TextField(
+                      readOnly: true,
+                      controller: Phoneno,
+                      decoration: InputDecoration(
+                          hintText: LocaleKeys.Phoneno.tr(),
+                          enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.5),
+                            borderSide:  BorderSide(color: color.primarycolor),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(6.5),
+                            borderSide:  BorderSide(color: color.primarycolor),
+                          )),
+                    ),
+                  ],
+                )),
+          ],
+        ),
+        bottomSheet: GestureDetector(
+          onTap: () {
+            if (defaultapi.environment == "sendbox") {
+              showdialog.showErroDialog(
+                  description: LocaleKeys
+                      .This_operation_was_not_performed_due_to_demo_mode.tr());
+            } else {
+              EditprofileAPI();
+            }
+          },
+          child: Container(
+            margin: EdgeInsets.only(
+              left: 4.w,
+              top: 1.h,
+              right: 4.w,
+              bottom: 1.h,
+            ),
+            height: 6.h,
+            decoration: BoxDecoration(
+              color: color.primarycolor,
+              borderRadius: BorderRadius.circular(7),
+            ),
+            child: Center(
+              child: Text(
+                LocaleKeys.reset.tr(),
+                style: TextStyle(
+                    fontFamily: 'Poppins_semiBold',
+                    color: Colors.white,
+                    fontSize: fontsize.Buttonfontsize),
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    },);
   }
 }

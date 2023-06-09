@@ -96,7 +96,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                         width: double.infinity,
                         height: 15.5.h,
                         decoration: BoxDecoration(
-                            border: Border.all(color: color.primarycolor),
+                            border: Border.all(color: themenotifier.isDark ? Colors.white : color.primarycolor),
                             borderRadius: BorderRadius.circular(6)),
                         child: InkWell(
                           onTap: () {
@@ -132,8 +132,9 @@ class _OrderhistoryState extends State<Orderhistory> {
                                           child: Text(
                                               LocaleKeys.On_the_way.tr(),
                                               style: TextStyle(
-                                                  fontSize: 8.sp,
+                                                  fontSize: 9.sp,
                                                   fontFamily: 'Poppins',
+                                                  fontWeight: FontWeight.bold,
                                                   color: Colors.white)),
                                         ),
                                       )
@@ -142,7 +143,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                                         "5") ...[
                                       Container(
                                         decoration: BoxDecoration(
-                                            color: color.primarycolor,
+                                            color: themenotifier.isDark ? Colors.white : color.primarycolor,
                                             borderRadius:
                                             BorderRadius.circular(5)),
                                         padding: EdgeInsets.all(6),
@@ -152,8 +153,8 @@ class _OrderhistoryState extends State<Orderhistory> {
                                               LocaleKeys.Completed.tr(),
                                               style: TextStyle(
                                                   fontSize: 8.sp,
-                                                  fontFamily: 'Poppins',
-                                                  color: Colors.white)),
+                                                  fontFamily: 'Poppins',fontWeight: FontWeight.bold,
+                                                  color: themenotifier.isDark ? Colors.black : color.white)),
                                         ),
                                       )
                                     ] else if (orderdata!
@@ -199,7 +200,7 @@ class _OrderhistoryState extends State<Orderhistory> {
                                 ),
                                 Container(
                                   height: 0.8.sp,
-                                  color: color.primarycolor,
+                                  color: themenotifier.isDark ? Colors.white : color.primarycolor,
                                 ),
                                 Row(
                                   children: [
