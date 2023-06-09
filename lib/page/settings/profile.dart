@@ -41,7 +41,7 @@ class _ProfileState extends State<Profile> {
   initdata() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
-      username = prefs.getString(UD_user_name)!;
+      username = prefs.getString(UD_user_name).toString();
       useremail = prefs.getString(UD_user_email)!;
       userprofile = prefs.getString(UD_user_profile)!;
     });
