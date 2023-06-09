@@ -74,7 +74,7 @@ class _HomepageState extends State<Homepage> {
               titleSpacing: 4.w,
               title: Text(
                 LocaleKeys.Dashboard.tr(),
-                style: TextStyle(fontFamily: 'Poppins_bold', fontSize: 16.sp,color: color.primarycolor),
+                style: TextStyle(fontFamily: 'Poppins_bold', fontSize: 16.sp,color: themenotifier.isDark ?  Colors.white : color.primarycolor),
               ),
               automaticallyImplyLeading: false,
             ),
@@ -96,7 +96,7 @@ class _HomepageState extends State<Homepage> {
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
                               width: 1,
-                              color: color.primarycolor,
+                              color: themenotifier.isDark ?  Colors.white : color.primarycolor,
                             )),
                         height: 15.h,
                         width: 44.w,
@@ -134,7 +134,7 @@ class _HomepageState extends State<Homepage> {
                             borderRadius: BorderRadius.circular(6),
                             border: Border.all(
                               width: 1,
-                              color: color.primarycolor,
+                              color: themenotifier.isDark ?  Colors.white : color.primarycolor,
                             )),
                         height: 15.h,
                         width: 44.w,
@@ -178,7 +178,7 @@ class _HomepageState extends State<Homepage> {
                       style: TextStyle(
                         fontFamily: 'Poppins_semibold',
                         fontSize: 17.sp,
-                        color: color.primarycolor
+                        color: themenotifier.isDark ?  Colors.white : color.primarycolor
                       ),
                     ),
                   ),
@@ -193,7 +193,7 @@ class _HomepageState extends State<Homepage> {
                           style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 10.sp,
-                            color: color.primarycolor
+                            color: themenotifier.isDark ?  Colors.white : color.primarycolor
                           ),
                         ),
                       ),
@@ -210,7 +210,7 @@ class _HomepageState extends State<Homepage> {
                               width: double.infinity,
                               height: 15.5.h,
                               decoration: BoxDecoration(
-                                  border: Border.all(color: color.primarycolor),
+                                  border: Border.all(color: themenotifier.isDark ?  Colors.white : color.primarycolor),
                                   borderRadius: BorderRadius.circular(6)),
                               child: InkWell(
                                 onTap: () {
@@ -241,7 +241,7 @@ class _HomepageState extends State<Homepage> {
                                               "4") ...[
                                             Container(
                                               decoration: BoxDecoration(
-                                                  color: color.primarycolor,
+                                                  color: Colors.green,
                                                   borderRadius:
                                                       BorderRadius.circular(5)),
                                               padding: EdgeInsets.all(6),
@@ -252,7 +252,7 @@ class _HomepageState extends State<Homepage> {
                                                     style: TextStyle(
                                                         fontSize: 9.sp,
                                                         fontFamily: 'Poppins',
-                                                        color: Colors.white,
+                                                        color: color.white,
                                                       fontWeight: FontWeight.bold
                                                     )),
                                               ),
@@ -319,7 +319,7 @@ class _HomepageState extends State<Homepage> {
                                       ),
                                       Container(
                                         height: 1.sp,
-                                        color: color.primarycolor,
+                                        color: themenotifier.isDark ?  Colors.white : color.primarycolor,
                                       ),
                                       Row(
                                         children: [

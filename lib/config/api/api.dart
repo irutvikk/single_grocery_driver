@@ -4,7 +4,8 @@ class defaultapi {
   // static String baseurl = "https://single-grocery.gravityinfotech.net/";
   static String baseUrl = "https://gmilkapp.yoursoftwaredemo.com/";
   static String appurl = baseUrl + "api/";
-  static String environment = "sendbox";
+  static String environment = "live";
+  // static String environment = "sendbox";
 }
 
 class Postapi {
